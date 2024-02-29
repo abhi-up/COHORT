@@ -1,0 +1,23 @@
+const zod = require("zod")
+
+function validateInput(obj) {
+    const schema = zod.object({
+        email: zod.string().email(),
+        password: zod.string().min(8),
+    })
+
+    const response = schema.safeParse(obj)
+    console.log(response)
+}
+
+validateInput({
+    email: "abhishek@gmail.com",
+    password: "jdhaskjdhajk",
+})
+/* 
+validateInput will return the below output
+  {
+    success: true,
+    data: { email: 'abhishek@gmail.com', password: 'jdhaskjdhajk' }
+  }
+*/
